@@ -47,6 +47,8 @@ const yScale = d3.scaleLinear()
 
 linePoint = xScale(elbowPoint) + xScale.bandwidth() / 2;
 
+console.log("Hello World!");
+
 svg.selectAll('.bar')
     .data(explainedVariance)
     .enter().append('rect')
@@ -67,6 +69,17 @@ svg.selectAll('.bar')
         svg.selectAll('.elbow-line')
             .attr('x1', linePoint)
             .attr('x2', linePoint);
+    })
+    .on('mouseover', function(d, i) {
+        d3.select(this).attr('fill', 'orange');
+    })
+    .on('mouseout', function(d, i) {
+        if (explainedVariance.indexOf(i)+1 !== (elbowPoint)) {
+            console.log(explainedVariance.indexOf(i)+1, elbowPoint);
+            d3.select(this).attr('fill', 'navy');
+        } else {
+            d3.select(this).attr('fill', 'orange');
+        }
     });
 
 

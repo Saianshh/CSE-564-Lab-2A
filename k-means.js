@@ -44,6 +44,17 @@ kSvg.selectAll('.bar')
         kSvg.selectAll('.elbow-line')
             .attr('x1', kLinePoint)
             .attr('x2', kLinePoint);
+    })
+    .on('mouseover', function(d, i) {
+        d3.select(this).attr('fill', 'orange');
+    })
+    .on('mouseout', function(d, i) {
+        if (mseValues.indexOf(i)+1 !== (elbow)) {
+            console.log(mseValues.indexOf(i)+1, elbow);
+            d3.select(this).attr('fill', 'navy');
+        } else {
+            d3.select(this).attr('fill', 'orange');
+        }
     });
 
 kSvg.append('line')
